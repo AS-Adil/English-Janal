@@ -31,7 +31,7 @@ const displayLesson = (lessons) => {
 const loadIfo = (id) => {
 
     // Active button 
-         const allBtn = document.getElementsByClassName('lesson-btn')
+         const allBtn = document.getElementsByClassName('lesson-btn') // this will return a Html collection, so we can't directly use forEach or simillar method as it don't return nodelist (if we want to use forEch or simillar method then, we can use "queryselectorAll")
          for(const btn of allBtn){
 
            btn.classList.remove('active')
