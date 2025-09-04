@@ -13,9 +13,9 @@ const displayLesson = (lessons) => {
   const lessonContainer = document.getElementById("lessons-container");
   lessons.forEach((lesson) => {
     const btnDiv = document.createElement("div");
-    btnDiv.innerHTML = `
-        
-                        <button onclick="loadIfo(${lesson.level_no})"  class="btn btn-outline btn-primary ">
+
+    btnDiv.innerHTML = `        
+                        <button id="lesson-btn-${lesson.level_no}" onclick="loadIfo(${lesson.level_no})"  class="btn btn-outline btn-primary lesson-btn">
                   <i class="fa-solid fa-book-open"></i>
                   Lesson -${lesson.level_no}
                 </button>
@@ -25,13 +25,53 @@ const displayLesson = (lessons) => {
   });
 };
 
+
+
 // 3) Getting all the words for every lesson ------------------
 const loadIfo = (id) => {
+
+    // Active button 
+         const allBtn = document.getElementsByClassName('lesson-btn')
+         for(const btn of allBtn){
+
+           btn.classList.remove('active')
+         }
+           const clickedBtn = document.getElementById(`lesson-btn-${id}`)
+            clickedBtn.classList.add('active')
+   
+
+
+
+
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayInfo(data.data));
-};
+    // .then((data) => displayInfo(data.data));
+    .then((data) => {
+
+      displayInfo(data.data)
+
+
+ 
+ 
+    });
+
+
+
+
+
+
+
+  };
+
+
+
+
+
+
+
+
+
 
 // 4) Creating Card for every words---------------
 const displayInfo = (words) => {
