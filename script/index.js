@@ -37,8 +37,32 @@ const loadIfo = (id) => {
 const displayInfo = (words) => {
   const wordContainer = document.getElementById("word-container");
   wordContainer.innerHTML = "";
+
+  // validaton for empty lessons 
+  if(words.length === 0){
+    wordContainer.innerHTML = `
+    
+            
+
+              <div class="col-span-full text-center space-y-4 mt-2">
+            <img class="mx-auto" src="assets/alert-error.png" alt="">
+
+            <p class="text-gray-500 font-bangla">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+            <h2 class="text-4xl font-semibold ">
+            নেক্সট Lesson এ যান
+            </h2>
+          </div>
+
+
+
+    `;
+      return;
+
+  }
+
+
+// ---------Adding validaion from video 6 --------
   words.forEach((word) => {
-    console.log(word);
     const div = document.createElement("div");
     div.className = `
   bg-white text-center rounded-xl shadow-md
@@ -47,23 +71,14 @@ const displayInfo = (words) => {
   hover:scale-102 hover:shadow-xl
 `;
 
-    // ​
-    // level: 5
-    // ​
-    // meaning: "অসুস্থ বা নিষ্ক্রিয়"
-    // ​
-    // pronunciation: "লিথারজিক"
-    // ​
-    // word: "Lethargic"
-
     div.innerHTML = `
           
-          <h3 class="text-2xl font-semibold">${word.word}</h3>
+          <h3 class="text-2xl font-semibold">${word.word ? word.word : "Not found😪"}</h3>
             <p class="font-semibold">
               Meaning / Pronounciation
             </p>
             <p class="font-semibold font-bangla">
-             "${word.meaning} / ${word.pronunciation}"   
+             "${word.meaning ? word.meaning: "Not found😪"} / ${word.pronunciation ? word.pronunciation : "Not found😪"}"   
             </p>
              <div class="flex justify-between w-full px-6">
                <button class="bg-[#1A91FF10] py-2 px-3  rounded-lg hover:bg-[#1A91FF80] cursor-pointer"><i class="fa-solid fa-circle-info"></i></button>
