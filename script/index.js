@@ -40,7 +40,7 @@ const loadIfo = (id) => {
             clickedBtn.classList.add('active')
    
 
-
+   
 
 
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
